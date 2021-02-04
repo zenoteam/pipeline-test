@@ -8,7 +8,7 @@ spec:
     source:
         git:
             ref: master
-            uri: https://github.com/ruddra/openshift-python-nginx.git
+            uri: https://github.com/zenoteam/pipeline-test.git
     strategy:
         jenkinsPipelineStrategy:
             jenkinsfilePath: openshift/pipelines/Jenkinsfile

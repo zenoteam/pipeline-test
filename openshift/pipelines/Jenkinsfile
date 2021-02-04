@@ -4,8 +4,8 @@ pipeline {
     }
     environment {
         APPLICATION_NAME = 'python-nginx'
-        GIT_REPO="http://github.com/ruddra/openshift-python-nginx.git"
-        GIT_BRANCH="master"
+        GIT_REPO="https://github.com/zenoteam/pipeline-test.git"
+        GIT_BRANCH="main"
         STAGE_TAG = "promoteToQA"
         DEV_PROJECT = "dev"
         STAGE_PROJECT = "stage"
