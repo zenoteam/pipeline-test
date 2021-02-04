@@ -23,3 +23,6 @@ spec:
         - bitbucket:
             secret: secret
           type: Bitbucket
+        - gitlab:
+            secret: secret
+          type: Gitlab
