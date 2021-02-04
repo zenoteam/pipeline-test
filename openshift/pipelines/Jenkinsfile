@@ -22,20 +22,18 @@ pipeline {
         stage ("Install Dependencies") {
             steps {
                 sh """
-                pip install virtualenv
-                virtualenv --no-site-packages .
-                source bin/activate
+
                 pip install -r app/requirements.pip
-                deactivate
+
                 """
             }
         }
         stage('Run Tests') {
             steps {
                 sh '''
-                source bin/activate
+                
                 nosetests app --with-xunit
-                deactivate
+                
                 '''
                 junit "nosetests.xml"
             }
