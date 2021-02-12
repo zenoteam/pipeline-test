@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, Response
 import http.client
-from db import db_config, db
-from models import Post
+from .db import db_config, db
+from .models import Post
 
 app = Flask(__name__)
 

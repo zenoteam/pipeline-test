@@ -3,11 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-user = os.environ['POSTGRES_USER']
-host = os.environ['POSTGRES_HOST']
-database = os.environ['POSTGRES_DB']
-pwd = os.environ['POSTGRES_PASSWORD']
-port = os.environ['POSTGRES_PORT']
+user = os.environ.get('POSTGRES_USER', 'postgres')
+host = os.environ.get('POSTGRES_HOST', 'postgres')
+database = os.environ('POSTGRES_DB', 'postgres')
+pwd = os.environ('POSTGRES_PASSWORD', 'postgres')
+port = os.environ.get('POSTGRES_PORT', '5432')
 
 DB_URI = 'postgresql://{user}:{pwd}@{host}:{port}/{database}'
 
