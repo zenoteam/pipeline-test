@@ -9,12 +9,14 @@ RUN apk add --no-cache python3 && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
     rm -r /root/.cache
 
+RUN apk add python3-dev build-base gcc linux-headers postgresql-dev
+
 # --- Work Directory ---
 WORKDIR /usr/src/app
 
 # --- Python Setup ---
 ADD . .
-RUN pip install -r app/requirements.pip
+RUN pip3 install -r app/requirements.txt
 
 # --- Nginx Setup ---
 COPY config/nginx/default.conf /etc/nginx/conf.d/
@@ -24,5 +26,5 @@ RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
 RUN addgroup nginx root
 
 # --- Expose and CMD ---
-EXPOSE 8081
 CMD gunicorn --bind 0.0.0.0:5000 wsgi --chdir /usr/src/app/app & nginx -g "daemon off;"
+EXPOSE 8081
