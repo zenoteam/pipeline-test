@@ -1,7 +1,7 @@
-from flask import Flask, jsonify, request, Response
+from flask import Flask, jsonify, request, url_for, render_template, redirect
 import http.client
-from .db import db_config, db
-from .models import Post
+from db import db_config, db
+from models import Post
 
 app = Flask(__name__)
 
@@ -12,7 +12,7 @@ app.db = db
 
 
 @app.route('/', methods=['GET', 'POST'])
-def getall_create():
+def getall():
     if request.method == "GET":
         posts = Post.query.order_by('id').all()
         response = []
@@ -21,22 +21,24 @@ def getall_create():
             del post["_sa_instance_state"]
             response.append(post)
         print(response)
-        return jsonify({'posts': response})
+        return render_template('blog/index.html', posts=response)
 
+
+@app.route('/create', methods=['GET', 'POST'])
+def create():
     if request.method == 'POST':
-        request_body = request.json
-        body = request_body['body']
-        description = request_body['description']
-        title = request_body['title']
+        description = request.form['description']
+        title = request.form['title']
+        body = request.form['body']
 
         post = Post(title=title, body=body, description=description)
 
         db.session.add(post)
         db.session.commit()
 
-        post = {"body": body, "title": title, 'description': description}
+        return redirect(url_for('getall'))
 
-    return jsonify({'result': post})
+    return render_template('blog/create.html')
 
 
 @app.route('/<int:postId>', methods=['GET', 'DELETE'])
@@ -58,4 +60,4 @@ def get_delete_post(postId):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
