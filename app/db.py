@@ -7,7 +7,7 @@ user = 'postgres'
 host = 'postgres'
 database = 'postgres'
 pwd = 'postgres'
-port = '5432'
+port = 5432
 
 DB_URI = 'postgresql://{user}:{pwd}@{host}:{port}/{database}'
 
