@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block header %}
+
+<div>
+  <h1>{% block title %}Posts{% endblock %}</h1>
+</div>
+
+<div class="create">
+  <a href="/create">Create</a>
+</div>
+
+{% endblock %} {% block content %} {% for post in posts %}
+<article class="post">
+  <header>
+    <div>
+      <h1>{{ post['title'] }}</h1>
+    </div>
+    <small>{{ post['description'] }}</small>
+  </header>
+  <p class="body">{{ post['body'] }}</p>
+</article>
+{% if not loop.last %}
+<hr />
+{% endif %} {% endfor %} {% endblock %}
