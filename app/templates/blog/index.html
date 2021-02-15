@@ -1,23 +1,24 @@
-{% extends 'base.html' %} {% block header %}
-
-<div>
-  <h1>{% block title %}Posts{% endblock %}</h1>
-</div>
-
-<div class="create">
-  <a href="/create">Create</a>
-</div>
-
-{% endblock %} {% block content %} {% for post in posts %}
-<article class="post">
-  <header>
-    <div>
-      <h1>{{ post['title'] }}</h1>
+{% extends 'base.html' %} {% block content %}
+<div class="user-profile">
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Zeno Nigeria</h1>
+      <p>Our prenium Post</p>
     </div>
-    <small>{{ post['description'] }}</small>
-  </header>
-  <p class="body">{{ post['body'] }}</p>
-</article>
-{% if not loop.last %}
-<hr />
-{% endif %} {% endfor %} {% endblock %}
+    <h3>Our Posts</h3>
+    <div class="row">
+      {% for post in posts %}
+      <div class="col-xs-6 col-md-3">
+        <tr>
+          <h3>{{ post['title'] }}</h3>
+          <p>{{ post['description'] }}</p>
+          <h4 class="body">{{ post['body'] }}</h4>
+        </tr>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- /container -->
+</div>
+
+{% endblock %}
